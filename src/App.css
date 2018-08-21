@@ -1,0 +1,52 @@
+nav {
+	background-color: #563d7c;
+	height: 55px;
+	position: relative;
+}
+.title {
+	    font-weight: 700;
+	    color: #fff;
+	    font-size: 1rem;
+}
+body {
+	    font-family: -apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,sans-serif;
+	    font-size: 1rem;
+	    font-weight: 400;
+	    line-height: 1.5;
+	    color: #212529;
+	    text-align: left;
+	    background-color: #e6e6e6
+}
+
+.dash-table {
+	margin: 1rem;
+}
+.expense-entry{
+	background-color: #fff;
+	padding: 0.5rem;
+}
+.expense-category{
+	background-color: #563d7c;
+	color: #fff;
+	text-transform: uppercase;
+	border-radius: 5px;
+	padding: 3px 5px;
+}
+.circle-btn{
+	border-radius: 100%;
+	background-color: gray;
+	padding: 0 5px;
+	margin-left: 5px;
+	color:#fff;
+	cursor: pointer;
+	-webkit-transition: opacity .5s ease;
+	-o-transition: opacity .5s ease;
+	transition: opacity .5s ease;
+}
+.icon{
+	font-size: 12px;
+}
+div.btn.btn-green {
+	background-color: #00827f !important;
+	color: #fff;
+}
