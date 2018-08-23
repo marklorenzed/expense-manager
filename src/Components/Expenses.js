@@ -2,10 +2,19 @@ import React, { Component } from 'react';
 import ExpenseItem from './ExpenseItem';
 
 class Expenses extends Component {
-  
 
+	constructor(){
+		super();
+		this.state={
+			sum: 0
+		}
+	}
 
-  render() {
+	deleteExpense(id){
+  		this.props.onDelete(id);
+	}
+	
+	render() {
 
 
 	let expenseItems;
@@ -13,10 +22,12 @@ class Expenses extends Component {
 		expenseItems = this.props.expenses.map(expense => {
 			// console.log(project);
 			return (
-				<ExpenseItem key={expense.id} expense={expense} category={expense.category}/>
-
+				<ExpenseItem onDelete={this.deleteExpense.bind(this)} key={expense.id} expense={expense} category={expense.category}/>
+			
 			);
+
 		})
+
 	}
 
 
@@ -25,10 +36,12 @@ class Expenses extends Component {
 			
 
 			<div className="col-12 mt-2">
-			<h5 className="text-uppercase">Expenses List</h5>
-			{expenseItems}
-				
+			<h5 className="text-uppercase">Expense List</h5>
+
+				{expenseItems}
+
 			</div>
+			
 
 			
 		</div>
