@@ -8,12 +8,15 @@ class Expenses extends Component {
 		this.state={
 			sum: 0
 		}
+		this.editExpense = this.editExpense.bind(this);
 	}
 
 	deleteExpense(id){
   		this.props.onDelete(id);
 	}
-	
+	editExpense(id, title, value, date, category){
+		this.props.onEdit(id, title, value, date, category);
+	}
 	render() {
 
 
@@ -22,7 +25,7 @@ class Expenses extends Component {
 		expenseItems = this.props.expenses.map(expense => {
 			// console.log(project);
 			return (
-				<ExpenseItem onDelete={this.deleteExpense.bind(this)} key={expense.id} expense={expense} category={expense.category}/>
+				<ExpenseItem onEditExpense={this.editExpense.bind(this)} onDelete={this.deleteExpense.bind(this)} key={expense.id} expense={expense} category={expense.category}/>
 			
 			);
 

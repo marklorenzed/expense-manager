@@ -22,25 +22,26 @@ class ExpenseItem extends Component {
 	  this.handleChangeOption = this.handleChangeOption.bind(this);
 	  this.handleTitleChange = this.handleTitleChange.bind(this);
 	  this.handleValueChange = this.handleValueChange.bind(this);
+	  this.onEditExpenseItem = this.onEditExpenseItem.bind(this);
 	}
 	handleDateChange(date) {
 	    this.setState({startDate: date},function() {
-	    	console.log(this.state.startDate._d)
+	    	// console.log(this.state.startDate._d)
 	    });
 	}
 	handleChangeOption(event) {
 		this.setState({optionState: event.target.value}, function() {
-			console.log(this.state.optionState)
+			// console.log(this.state.optionState)
 		});	
 	}
 	handleTitleChange(event){
 		this.setState({title: event.target.value}, function() {
-			console.log(this.state.title)
+			// console.log(this.state.title)
 		})
 	}
 	handleValueChange(event){
 		 this.setState({value: event.target.value}, function() {
-			console.log(this.state.value)
+			// console.log(this.state.value)
 		});
 	}
 	deleteExpense(id) {
@@ -65,8 +66,17 @@ class ExpenseItem extends Component {
 	  this.setState({optionState: this.props.expense.category_id})
 	  this.setState({value: this.props.expense.value})
 	  this.setState({expense: this.props.expense})
+	  this.setState({title: this.props.expense.title})
 	}
 
+	onEditExpenseItem(event){
+		event.preventDefault();
+		var category = this.state.categories.find( (category) => {
+			return category.id === this.category_id.value
+		})
+
+		this.props.onEditExpense(this.state.expense.id ,this.state.title, this.state.value, this.state.startDate._d, category)
+	}
 
 	render() {
 	let categoryoptions;
@@ -74,7 +84,12 @@ class ExpenseItem extends Component {
 	  categoryoptions = this.state.categories.map(category => {
 	    return (
 	    	
-	    	<option key={category.id} value={category.id}>{category.title}</option>
+	    	<option 
+	    		key={category.id} 
+	    		value={category.id}
+
+	    	>{category.title}
+	    	</option>
 	    	
 	      
 	    );
@@ -90,7 +105,7 @@ class ExpenseItem extends Component {
       		</div>
       		<div>
       			<small className="expense-category">{this.state.expense.category.title}</small>
-      			<small> <Moment format="LL">{this.state.expense.createdAt}</Moment></small>
+      			<small> <Moment format="MMM DD YYYY">{this.state.expense.date}</Moment></small>
       		</div>
       	</div>
         <div className="col-3 text-right p-0">
@@ -117,14 +132,14 @@ class ExpenseItem extends Component {
       		<div className="modal-dialog modal-lg modal-dialog-centered" role="document">
       	    	<div className="modal-content">
 					<div className="modal-body">
-						<div className="mb-4 mt-2">
+						<div className="pb-4 mt-2">
 							<h4>Expense Form</h4>
 							
 							<div className="form-group">
-								<input type="text" ref="title" className="form-control form-control-sm" onChange={this.handleTitleChange} defaultValue={this.state.expense.title}/>
+								<input type="text" ref={title => this.title = title} className="form-control form-control-sm" onChange={this.handleTitleChange} value={this.state.title}/>
 							</div>
 							<div className="form-group">
-								<select ref="category_id" className="form-control form-control-sm" onChange={this.handleChangeOption} value={this.state.optionState}>
+								<select ref={category_id => this.category_id = category_id} className="form-control form-control-sm" onChange={this.handleChangeOption} value={this.state.optionState}>
 									{categoryoptions}
 								</select>
 
@@ -137,8 +152,9 @@ class ExpenseItem extends Component {
 								    showTimeSelect
 								    timeFormat="HH:mm"
 								    timeIntervals={15}
-								    dateFormat="LLL"
+								    dateFormat="MM/DD/YYYY h:mm"
 								    timeCaption="time"
+								    ref={date => this.date = date}
 								/>
 							</div>
 
@@ -147,7 +163,7 @@ class ExpenseItem extends Component {
 									<div className="input-group-prepend">
 										<span className="input-group-text" id="inputGroupPrepend3">₱</span>
 									</div>
-									<input type="number" name="value" className="form-control" placeholder="0.00" onChange={this.handleValueChange} value={this.state.value} />
+									<input type="number" ref={value => this.value = value} className="form-control" placeholder="0.00" onChange={this.handleValueChange} value={this.state.value} />
 								</div>
 								
 			
@@ -157,9 +173,9 @@ class ExpenseItem extends Component {
 						</div>
 						<div className="action-bar row mx-0 justify-content-end">
 							<div className="col-auto">
-								<div className="btn btn-success btn-green">
-									<small>SAVE</small>
-								</div>
+								<button type="button" className="btn btn-success btn-green" data-dismiss="modal" onClick = {this.onEditExpenseItem}>
+										<small>SAVE</small>
+									</button>
 							</div>
 							<div className="col-auto px-0">
 								<div className="btn btn-danger" data-dismiss="modal">

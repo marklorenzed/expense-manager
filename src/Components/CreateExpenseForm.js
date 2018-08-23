@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import Moment from 'react-moment';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import moment from 'moment';
@@ -80,7 +79,7 @@ class CreateExpenseForm extends Component {
       	    	<div className="modal-content">
 					<div className="modal-body">
 						<form>
-							<div className="mb-4 mt-2">
+							<div className="pb-4 mt-2">
 								<h4>Expense Form</h4>
 									
 									<div className="form-group">

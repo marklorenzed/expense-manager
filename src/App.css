@@ -15,7 +15,8 @@ body {
 	    line-height: 1.5;
 	    color: #212529;
 	    text-align: left;
-	    background-color: #e6e6e6
+	    background-color: #e6e6e6;
+	    padding-top: 55px;
 }
 
 .dash-table {
@@ -81,3 +82,29 @@ div.btn.btn-green {
 }
 
 
+.backBtn {
+	position: absolute;
+	top: 16px;
+	color: #007bff;
+	left: 28px;
+}
+.backBtn a{
+	text-decoration: none;
+}
+
+.category-header {
+	display: flex;
+    -ms-flex-direction: row;
+    flex-direction: row;
+    margin-bottom: 10px;
+}
+.category-header button.btn {
+	margin-left: 20px;
+}
+.category-entry{
+    background-color: #fff;
+    padding: .5rem;
+}
+.hidden {
+	display: none;
+}
